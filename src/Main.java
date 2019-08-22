@@ -4,6 +4,14 @@ import java.util.*;
 
 class MainTest {
     public static void main(String[] args) {
+        int i = 0;
+        System.out.println(++i == i++);
+        System.out.println(i++ == i++);
+
+        int j = 0;
+        System.out.println(++j + " " + j++);
+        System.out.println(j++ + " " + j++);
+
         //Map structure = new HashMap();
         Map structure = new TreeMap();
         structure.put("a", 420);
@@ -278,4 +286,128 @@ class Bar {
     }
 }
 
+class test {
+    static {
+        System.out.println("Bo-Bo!");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+
+    static {
+        System.out.println("Go-Go!");
+        System.exit(0);
+    }
+}
+//-------------------------------------------------
+class Base {
+    public String name = "Base";
+    public String getName() {
+        return name;
+    }
+}
+
+class Sub extends Base {
+    public String name = "Sub";
+    public String getName() {
+        return name;
+    }
+}
+class Program {
+    public static void main(String[] args) {
+        Sub s = new Sub();
+        Base b = s;
+        System.out.println(b.name);//Base
+    }
+}
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.print("Running ");
+    }
+    public void start() {
+        System.out.print("Starting ");
+    }
+}
+
+class Q202 {
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start(); //Starting
+    }
+}
+
+class E {
+    public static void main(int[] args){
+        System.out.println("Hi, World!");
+    }
+
+    public static void main(String... args){
+        System.out.println("Hello, World!");
+    }
+
+}
+
+class Main2 {
+    private static class A1 {
+        String s1 = "S1";
+        private String test() {
+            System.out.println(s1);
+            return "A1";
+        }
+    }
+
+    public static class A2 extends A1 {
+        String s2 = "S2";
+        public String test() {
+            System.out.println(s2);
+            return "A2";
+        }
+    }
+
+    public static class A3 extends A2 {
+        String s3 = "S3";
+        public String test() {
+            System.out.println(s3);
+            return "A3";
+        }
+    }
+
+    public static void main(String ... arg) {
+        A1 a1 = new A1();
+        System.out.println(a1.test());//A1
+        a1 = new A2();
+        System.out.println(a1.test());//A1
+        a1 = new A3();
+        System.out.println(a1.test());//A1
+    }
+
+}
+
+class X {
+    int x = 1;
+
+    public void printX() {
+        System.out.println(getX());
+    }
+
+    public int getX() {
+        return x;
+    }
+}
+
+class Y extends X {
+    int x = 2;
+
+    public int getX() {
+        return x + 1;
+    }
+}
+class Test4 {
+    public sttic void main(String[] args) {
+        X classA = new Y();
+        classA.printX();
+    }
+}
 
