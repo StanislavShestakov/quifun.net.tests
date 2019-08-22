@@ -405,7 +405,7 @@ class Y extends X {
     }
 }
 class Test4 {
-    public sttic void main(String[] args) {
+    public static void main(String[] args) {
         X classA = new Y();
         classA.printX();
     }
