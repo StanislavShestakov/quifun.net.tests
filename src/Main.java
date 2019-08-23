@@ -4,6 +4,15 @@ import java.util.*;
 
 class MainTest {
     public static void main(String[] args) {
+        Map map = new WeakHashMap();
+        Object obj = new Object(); // создаём объект
+        map.put(obj, "object"); // кладём его в мапу
+        System.out.println(map.size()); // в мапе один элемент
+        obj = null; // чистим ссылку
+        System.gc(); // играемся со сборщиком мусора
+        System.runFinalization();
+        System.out.println(map.size()); // мапа должна стать пустой
+
         int i = 0;
         System.out.println(++i == i++);
         System.out.println(i++ == i++);
@@ -410,4 +419,98 @@ class Test4 {
         classA.printX();
     }
 }
+
+abstract class Animal {
+    static {
+        System.out.println("Inside Animal");
+    }
+}
+
+class Cat extends Animal {
+    static {
+        System.out.println("Inside Cat");
+    }
+}
+
+class Dog extends Animal {
+    static {
+        System.out.println("Inside Dog");
+    }
+}
+
+class Main3 {
+    public static void main(String[] args){
+        Animal cat = new Cat();
+        Animal dog = new Dog();
+        /*
+        Inside Animal
+Inside Cat
+Inside Dog
+        * */
+    }
+}
+
+class TypesTutorial {
+
+    public static void main(String... atgs) {
+        B1 alpha = new B1();//AbBb
+    }
+}
+
+class A1 {
+    A1(){
+        System.out.print("A");
+        a();
+    }
+
+    void a() {
+        System.out.print("a");
+    }
+}
+
+class B1 extends A1 {
+    B1() {
+        System.out.print("B");
+        a();
+    }
+
+    void a() {
+        System.out.print("b");
+    }
+}
+
+class TestClass {
+    int i = getInt();
+    int k = 20;
+    public int getInt() {  return k+1;  }
+    public static void main(String[] args) {
+        TestClass t = new TestClass();
+        System.out.println(t.i + "  " + t.k); //1  20   инициализация идет в порядке написания k = 0 в getInt();
+    }
+}
+class Autoboxing {
+    public static void main(String[] args) {
+        Integer oInt1 = null;
+        Integer oInt2 = 0;
+        final int int1 = oInt1;//java.lang.NullPointerException
+        final int int2 = oInt2;
+        System.out.println(int1 == int2);
+    }
+}
+class Test5 {
+
+    static int[] arrInstance = new int[100];
+
+    public static void main(String[] args) {
+        byte[] arrLocal = new byte[100];
+
+        for (int i = 0; i < 100; i++)
+            if (arrInstance[i] != arrLocal[i]) {
+                throw new IllegalStateException("error");
+            }
+    }
+}
+
+
+
 
